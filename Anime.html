@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Search</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="responsive.css">
+    <style>
+      /* Glassmorphism Form Styling */
+      .trending-card , .recommend-card{
+        cursor: pointer;
+      }
+  </style>
+</head>
+<body>
+    <!-- Navbar (Keeping original) -->
+    <nav class="navbar">
+        <div class="logo">ShowFusion</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="TvShows.html">TV Shows</a>
+            <a href="Anime.html" style="color: #FF6F61;">Animes</a>
+            <a href="Movie.html">Movies</a>
+        </div>
+        <div class="profile" title="Account">A</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+  
+    <!-- Mobile Menu (Keeping original) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-close" id="mobileClose">×</div>
+        <a href="index.html">Home</a>
+        <a href="TvShows.html">TV Shows</a>
+        <a href="Anime.html" style="color: #FF6F61;">Animes</a>
+        <a href="Movie.html">Movies</a>
+        <a href="#">My Account</a>
+    </div>
+     <!-- Image Slider -->
+  <div class="image-slider" id="imageSlider">
+    <div class="slide slide-1 active" style="background: url('https://wallpapers.com/images/high/iron-throne-from-game-of-thrones-l3h0rq17epk4v6r2.webp') center/cover no-repeat;">
+      <div class="slide-content">
+        <h2>Discover New TV Shows</h2>
+        <p>Stream the latest episodes of your favorite TV series with premium quality.</p>
+        <a href="TvShows.html">Watch Now</a>
+      </div>
+    </div>
+    <div class="slide slide-2" style="background: url('https://wallpapers.com/images/high/black-clover-characters-xwiz0kd7obbmcb2d.webp') center/cover no-repeat;">
+      <div class="slide-content">
+        <h2>Explore Amazing Anime</h2>
+        <p>Dive into a world of imagination with popular and classic anime series.</p>
+        <a href="Anime.html">Explore Anime</a>
+      </div>
+    </div>
+    <div class="slide slide-3" style="background: url('https://wallpapers.com/images/high/the-dark-knight-trilogy-aesthetic-fan-art-nsc4se5k259lqo65.webp') center/cover no-repeat;">
+      <div class="slide-content">
+        <h2>Latest Blockbuster Movies</h2>
+        <p>Experience cinematic masterpieces from around the world in high definition.</p>
+        <a href="Movie.html">Browse Movies</a>
+      </div>
+    </div>
+  </div>
+    <section class="trending">
+        <div class="container">
+          <h2>Top Trending Anime</h2>
+          <div class="trending-grid">
+            <!-- Card 1: Naruto -->
+            <div class="glass-card trending-card" data-id="naruto" >
+              <div class="trending-content"  id="20" style="background: url('https://wallpapers.com/images/high/naruto-uzumaki-4k-mtswri40om2eov4o.webp') center/cover no-repeat;">
+                <div class="trending-text">
+                  <h3>Naruto</h3>
+                  <p>A young ninja with a sealed demon within him aspires to become the leader of his village.</p>
+                  <div class="trending-meta">
+                    <div class="rating">★ 8.3</div>
+                    <div class="trending-type">Anime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Card 2: One Piece -->
+            <div class="glass-card trending-card" data-id="onepiece">
+              <div class="trending-content"  id="21" style="background: url('https://wallpapers.com/images/hd/one-piece-luffy-holding-hat-nazsl5hmss8bfb9n.webp') center/cover no-repeat;">
+                <div class="trending-text">
+                  <h3>One Piece</h3>
+                  <p>Pirates search for the ultimate treasure in a vast and dangerous sea.</p>
+                  <div class="trending-meta">
+                    <div class="rating">★ 8.9</div>
+                    <div class="trending-type">Anime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Card 3: Bleach -->
+            <div class="glass-card trending-card" data-id="bleach" >
+              <div class="trending-content" id="269" style="background: url('https://wallpapers.com/images/high/bleach-ichigo-kurosaki-and-captains-7bysnovx3hhb2g0x.webp') center/cover no-repeat;">
+                <div class="trending-text" >
+                  <h3>Bleach</h3>
+                  <p>Ichigo Kurosaki becomes a Soul Reaper and battles evil spirits to protect the living world.</p>
+                  <div class="trending-meta">
+                    <div class="rating">★ 8.8</div>
+                    <div class="trending-type">Anime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Card 4: Black Clover -->
+            <div class="glass-card trending-card" data-id="blackclover">
+              <div class="trending-content" id="34572" style="background: url('https://wallpapers.com/images/high/black-clover-iphone-sr33thqw8vf0y1mq.webp') center/cover no-repeat;">
+                <div class="trending-text">
+                  <h3>Black Clover</h3>
+                  <p>A boy born without magic aims to become the Wizard King in a magical world.</p>
+                  <div class="trending-meta">
+                    <div class="rating">★ 8.5</div>
+                    <div class="trending-type">Anime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Card 5: DBZ -->
+            <div class="glass-card trending-card" data-id="dbz">
+              <div class="trending-content" id="813" style="background: url('https://wallpapers.com/images/high/cool-dragon-ball-z-ya80mbs14zqrhm8b.webp') center/cover no-repeat;">
+                <div class="trending-text">
+                  <h3>Dragon Ball Z</h3>
+                  <p>Goku and his friends battle powerful foes to protect the Earth and the universe.</p>
+                  <div class="trending-meta">
+                    <div class="rating">★ 9.0</div>
+                    <div class="trending-type">Anime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+             
+            <!-- Card 6: Solo Leveling -->
+            <div class="glass-card trending-card" data-id="sololeveling">
+              <div class="trending-content" id="52299" style="background: url('https://wallpapers.com/images/high/scary-anime-statue-of-god-l5c3yb2ls71usq2n.webp') center/cover no-repeat;">
+                <div class="trending-text">
+                  <h3>Solo Leveling</h3>
+                  <p>A weak hunter gains extraordinary abilities and becomes the strongest.</p>
+                  <div class="trending-meta">
+                    <div class="rating">★ 8.7</div>
+                    <div class="trending-type">Anime</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
+           
+    <!-- NEW GLASSMORPHISM SEARCH SECTION -->
+    <div class="search-section">
+        <h2>Search Your Favourite Anime</h2> 
+        <!-- Glow effects -->
+        <div class="glow-effect glow-1"></div>
+        <div class="glow-effect glow-2"></div>
+          <form class="search-form">
+            <input type="text" name="query" placeholder="Search Animes Here..." class="search-input">
+            <div class="btn-container">
+              <button class="search-btn" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.106a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <div id="shows">
+            <!-- Show results will appear here -->
+        </div>
+    </div>
+
+      <!-- Popular Categories -->
+  <section class="popular">
+    <div class="container">
+      <h2>Popular Categories</h2>
+      <div class="categories-grid">
+        <div class="glass-card category-card">
+          <div class="category-icon">⚔️</div>
+          <h3>Shonen</h3>
+          <p>Action-packed anime targeted at teenage boys</p>
+        </div>
+        <div class="glass-card category-card">
+          <div class="category-icon">💖</div>
+          <h3>Shojo</h3>
+          <p>Romance and drama aimed at teenage girls</p>
+        </div>
+        <div class="glass-card category-card">
+          <div class="category-icon">🎭</div>
+          <h3>Seinen</h3>
+          <p>Mature themes for young adult males</p>
+        </div>
+        <div class="glass-card category-card">
+          <div class="category-icon">🔮</div>
+          <h3>Isekai</h3>
+          <p>Characters transported to fantasy worlds</p>
+        </div>
+      </div>
+    </div>
+  </section>
+   
+  <section class="recommendations">
+    <div class="container">
+      <h2>Must watch Animes</h2>
+      <div class="recommendations-grid">
+        <!-- Card 1: Fullmetal Alchemist: Brotherhood -->
+        <div class="glass-card recommend-card" id="5114">
+          <img src="https://wallpapers.com/images/high/fullmetal-alchemist-brotherhood-pictures-37r76onyp2mry1tc.webp" alt="Fullmetal Alchemist: Brotherhood">
+          <div class="recommend-content">
+            <h3>Fullmetal Alchemist: Brotherhood</h3>
+            <p>A tale of two brothers on a quest for redemption in a world of alchemy.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 9.1</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+         
+        <!-- Card 2: Steins;Gate -->
+        <div class="glass-card recommend-card" id="9253">
+          <img src="https://wallpapers.com/images/hd/steins-gate-stylish-outfits-eyml4k816uled9bw.webp" alt="Steins;Gate">
+          <div class="recommend-content" >
+            <h3>Steins Gate</h3>
+            <p>A group of friends discovers time travel, unraveling a dangerous conspiracy.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 9.0</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+       
+   
+        <!-- Card: Idaten Jump -->
+    <div class="glass-card recommend-card" id="1316">
+    <img src="https://m.media-amazon.com/images/M/MV5BYThhZTY3YWItOTRjYS00ZThjLTk2ZTItODEwY2UwZGU0ZWQxXkEyXkFqcGc@._V1_.jpg" alt="Idaten Jump">
+    <div class="recommend-content">
+      <h3>Idaten Jump</h3>
+      <p>A high-energy anime featuring thrilling athletic competitions and dynamic action.</p>
+      <div class="recommend-meta">
+        <div class="rating">★ 8.5</div>
+        <div class="trending-type">Anime</div>
+      </div>
+    </div>
+  </div>
+        <!-- Card 4: Hunter x Hunter -->
+        <div class="glass-card recommend-card" id="136">
+          <img src="https://m.media-amazon.com/images/M/MV5BYzYxOTlkYzctNGY2MC00MjNjLWIxOWMtY2QwYjcxZWIwMmEwXkEyXkFqcGc@._V1_QL75_UY281_CR4,0,190,281_.jpg" alt="Hunter x Hunter">
+          <div class="recommend-content">
+            <h3>Hunter x Hunter</h3>
+            <p>A young boy embarks on an adventurous journey to become a legendary Hunter.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 9.0</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5: Death Note -->
+        <div class="glass-card recommend-card" id="1535">
+          <img src="https://wallpapers.com/images/high/death-note-obata-takeshi-qz191tzfpbgaci18.webp" alt="Death Note">
+          <div class="recommend-content">
+            <h3>Death Note</h3>
+            <p>A brilliant student wields a supernatural notebook to eliminate criminals.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 9.0</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6: My Hero Academia -->
+        <div class="glass-card recommend-card" id="31964">
+          <img src="https://wallpapers.com/images/hd/my-hero-academia-katsuki-bakugo-gpw5bb25c5mimiol.webp" alt="My Hero Academia">
+          <div class="recommend-content">
+            <h3>My Hero Academia</h3>
+            <p>A quirkless boy dreams of becoming a hero in a world where superpowers are the norm.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 8.7</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+    <!-- Footer (Keeping original) -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>About ShowFusion</h3>
+                    <p>ShowFusion is your ultimate entertainment platform for discovering movies, TV shows, and anime from around the world.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Movie.html">Movies</a></li>
+                        <li><a href="TvShows.html">TV Shows</a></li>
+                        <li><a href="Anime.html" style="color: #FF6F61;">Anime</a></li>
+                        <li><a href="#">My List</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Help & Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates on new releases and features.</p>
+                    <form>
+                        <input type="email" id="email" placeholder="Enter your email" style="padding:8px; width:100%; margin-bottom:10px; border-radius:4px; border:none;">
+                        <button id="Newsletter" style="background:#FF6F61; color:#fff; border:none; padding:8px 15px; border-radius:4px; cursor:pointer; width:100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShowFusion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Animation (Keeping original)
+        const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click', () => { 
+  mobileMenu.classList.toggle('open'); 
+});
+
+mobileClose.addEventListener('click', () => { 
+  mobileMenu.classList.remove('open'); 
+});
+
+document.addEventListener('click', (e) => {
+  if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+    mobileMenu.classList.remove('open');
+  }
+});
+        
+        // Image Slider (Keeping original)
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        setInterval(nextSlide, 5000);
+
+        // Newsletter (Keeping original)
+        const newsletterBtn = document.getElementById('Newsletter');
+        const emailInput = document.getElementById('email');
+        
+        function isValidEmail(email) {
+            // Simple regex for email validation
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        
+        newsletterBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            const email = emailInput.value.trim();
+            
+            if (email === "" || !isValidEmail(email)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Please enter a valid email address",
+                    customClass: {
+                        popup: 'glass-swal'
+                    }
+                });
+                return;
+            }
+            
+            Swal.fire({
+                title: `<strong>Newsletters will be sent to ${email}</strong>`,
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                    popup: 'glass-swal'
+                }
+            });
+            emailInput.value = "";
+        });
+
+        // TV Show Search Script (Updated with animations)
+        const form = document.querySelector('.search-form');
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const input = document.querySelector('.search-input').value;
+          
+          // Show loading message
+          gsap.registerPlugin(TextPlugin); // Register TextPlugin
+      
+          const showsDiv = document.getElementById('shows');
+          showsDiv.innerHTML = `
+              <div id="loadingText" style="text-align: center; width: 100%; font-size: 20px; font-weight: bold;">
+                  <p>Searching for "${input}"<span id="dots">.</span></p>
+              </div>`;
+        
+          // GSAP Animation for Dots
+          gsap.to("#dots", {
+              duration: 0.5,
+              text: "...",
+              repeat: -1,
+              yoyo: true
+          });
+      try {
+        const res = await axios.get(`https://api.jikan.moe/v4/anime?q=${input}`);
+        getMovies(res.data);
+        console.log(res.data)
+        
+      } catch(e) {
+        showsDiv.innerHTML = `
+          <div style="text-align: center; width: 100%; padding: 30px; background: rgba(255, 80, 80, 0.1); backdrop-filter: blur(5px); border-radius: 15px;">
+            <h3>Error</h3>
+            <p>${e.message}</p>
+          </div>`;
+      }
+    });
+    
+    // Function to display movies/anime results
+    const getMovies = (data) => {
+        const showsDiv = document.getElementById('shows');
+        showsDiv.innerHTML = '';
+      
+        // Ensure data.data exists and is an array
+        const results = data.data;
+        if (!results || results.length === 0) {
+          showsDiv.innerHTML = `
+            <div style="text-align: center; width: 100%; padding: 30px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border-radius: 15px;">
+              <h3>No results found</h3>
+              <p>Try searching for something else</p>
+            </div>`;
+          return;
+        }
+      
+        results.forEach((anime, index) => {
+          if (anime.images && anime.images.jpg && anime.images.jpg.image_url) {
+            const newDiv = document.createElement('div');
+            newDiv.setAttribute("class", "Show");
+            newDiv.style.opacity = "0";
+            newDiv.style.transform = "translateY(20px)";
+            newDiv.style.transition = "all 0.5s ease";
+      
+            const imag = document.createElement('img');
+            imag.src = anime.images.jpg.image_url;
+      
+            const name = document.createElement('h2');
+            name.innerText = anime.title;
+      
+            const hr1 = document.createElement('hr');
+            const hr3 = document.createElement('hr');
+            const hr4 = document.createElement('hr');
+            const hr5 = document.createElement('hr');
+      
+            const premiered = document.createElement('h2');
+            premiered.innerText = `Premiered: ${anime.aired && anime.aired.from ? anime.aired.from.split("T")[0] : "N/A"}`;
+      
+            const language = document.createElement('h2');
+            // Jikan API doesn't provide language; assuming Japanese as default.
+            language.innerText = `Language: Japanese`;
+      
+            const status = document.createElement('h2');
+            // No status in API so default to N/A.
+            status.innerText = `Status: N/A`;
+      
+            const hr2 = document.createElement('hr');
+            const rating = document.createElement('h2')
+            rating.innerHTML = `Rating : <span style =" color:#FFD700;"> ★ </span> ${anime.score}`;
+            const norating = document.createElement('h2')
+            norating.innerText = `Rating : N/A`
+            
+            const more = document.createElement('h2');
+            more.innerHTML = `<a href="detailsanime.html?id=${anime.mal_id}" class="more-link">Click To See More</a>`
+            newDiv.appendChild(imag);
+            newDiv.appendChild(name);
+            newDiv.appendChild(hr1);
+            newDiv.appendChild(premiered);
+            newDiv.appendChild(hr2);
+            newDiv.appendChild(language);
+            newDiv.appendChild(hr3);
+            newDiv.appendChild(status);
+            newDiv.appendChild(hr4);
+            if(anime.score){
+              newDiv.appendChild(rating);
+              }
+              else{
+                  newDiv.appendChild(norating);
+              }
+            newDiv.appendChild(hr5);
+            newDiv.appendChild(more)
+            showsDiv.appendChild(newDiv);
+      
+            // Staggered animation for the card appearance
+            setTimeout(() => {
+              newDiv.style.opacity = "1";
+              newDiv.style.transform = "translateY(0)";
+            }, 100 * (index + 1));
+          }
+        });
+      };
+
+        const clear = document.querySelector('#clear');
+        clear.addEventListener("click", () => {
+            const showsDiv = document.getElementById('shows');
+            
+            // Animate out
+            Array.from(showsDiv.children).forEach((child, index) => {
+                setTimeout(() => {
+                    child.style.opacity = "0";
+                    child.style.transform = "translateY(20px)";
+                }, 50 * index);
+            });
+            
+            // Clear after animation
+            setTimeout(() => {
+                showsDiv.innerHTML = "";
+            }, 300);
+        });
+    </script>
+    <script>
+      const onepiece = document.getElementById('21');
+        if (onepiece) {
+          onepiece.addEventListener("click", () => {
+                window.location.href = `detailsanime.html?id=21`;
+            });
+        } else {
+            console.log("Element with ID '21' not found");
+        }
+        const naruto = document.getElementById('20');
+        if (naruto) {
+        naruto.addEventListener("click", () => {
+                window.location.href = `detailsanime.html?id=20`;
+            });
+        } else {
+            console.log("Element with ID '20' not found");
+        }
+        const bleach = document.getElementById('269');
+        if (bleach) {
+          bleach.addEventListener("click", () => {
+                window.location.href = `detailsanime.html?id=269`;
+            });
+        } else {
+            console.log("Element with ID '269' not found");
+        }
+        const blackClover = document.getElementById('34572');
+        blackClover.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=34572`;
+        })
+        const dbz = document.getElementById('813');
+        dbz.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=813`;
+        })
+        const sololeveling = document.getElementById('52299');
+        sololeveling.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=52299`;
+        })
+        const FullmetalAlchemist = document.getElementById('5114');
+        FullmetalAlchemist.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=5114`;
+        })
+        const stenisgate = document.getElementById('9253');
+        stenisgate.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=9253`;
+        })
+        const  idatenJUmp = document.getElementById('1316');
+        idatenJUmp.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=1316`;
+        })
+        const hunterxhunter = document.getElementById('136');
+        hunterxhunter.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=136`;
+        })
+        const deathnote = document.getElementById('1535');
+        deathnote.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=1535`;
+        })
+        const academia = document.getElementById('31964');
+        academia.addEventListener("click",()=>{
+           window.location.href = `detailsanime.html?id=31964`;
+        })
+    </script>
+</body>
+</html>

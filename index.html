@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShowFusion - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="responsive.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<style>
+  .trending-card , .recommend-card{
+    cursor: pointer;
+  }
+</style>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">ShowFusion</div>
+    <div class="nav-links">
+      <a href="index.html" style="color: #FF6F61;">Home</a>
+      <a href="TvShows.html">TV Shows</a>
+      <a href="Anime.html">Animes</a>
+      <a href="Movie.html">Movies</a>
+    </div>
+    <div class="profile" title="Account">A</div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-close" id="mobileClose">×</div>
+    <a href="index.html" style="color: #FF6F61;">Home</a>
+    <a href="TvShows.html">TV Shows</a>
+    <a href="Anime.html">Animes</a>
+    <a href="Movie.html">Movies</a>
+    <a href="#">My Account</a>
+  </div>
+  
+  <!-- Image Slider -->
+  <div class="image-slider" id="imageSlider">
+    <div class="slide slide-1 active" style="background: url('https://wallpapers.com/images/high/iron-throne-from-game-of-thrones-l3h0rq17epk4v6r2.webp') center/cover no-repeat;">
+      <div class="slide-content">
+        <h2>Discover New TV Shows</h2>
+        <p>Stream the latest episodes of your favorite TV series with premium quality.</p>
+        <a href="TvShows.html">Watch Now</a>
+      </div>
+    </div>
+    <div class="slide slide-2" style="background: url('https://wallpapers.com/images/high/black-clover-characters-xwiz0kd7obbmcb2d.webp') center/cover no-repeat;">
+      <div class="slide-content">
+        <h2>Explore Amazing Anime</h2>
+        <p>Dive into a world of imagination with popular and classic anime series.</p>
+        <a href="Anime.html">Explore Anime</a>
+      </div>
+    </div>
+    <div class="slide slide-3" style="background: url('https://wallpapers.com/images/high/the-dark-knight-trilogy-aesthetic-fan-art-nsc4se5k259lqo65.webp') center/cover no-repeat;">
+      <div class="slide-content">
+        <h2>Latest Blockbuster Movies</h2>
+        <p>Experience cinematic masterpieces from around the world in high definition.</p>
+        <a href="Movie.html">Browse Movies</a>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Trending Section -->
+  <section class="trending">
+    <div class="container">
+      <h2>Top Trending</h2>
+      <div class="trending-grid">
+        <!-- TV Shows -->
+        <div class="glass-card trending-card">
+          <div class="trending-content" id="169" style="background: url('https://wallpapers.com/images/high/breaking-bad-shattered-walter-z1k4ddpgy54nlrez.webp') center/cover no-repeat;">
+            <div class="trending-text">
+              <h3>Breaking Bad</h3>
+              <p>A high school chemistry teacher turned meth producer partners with a former student.</p>
+              <div class="trending-meta">
+                <div class="rating">★ 9.5</div>
+                <div class="trending-type">TV Show</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card trending-card">
+          <div class="trending-content" id="82" style="background: url('https://wallpapers.com/images/high/iron-throne-from-game-of-thrones-l3h0rq17epk4v6r2.webp') center/cover no-repeat;">
+            <div class="trending-text">
+              <h3>Game of Thrones</h3>
+              <p>Nine noble families fight for control over Westeros while an ancient enemy returns.</p>
+              <div class="trending-meta">
+                <div class="rating">★ 9.2</div>
+                <div class="trending-type">TV Show</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Anime -->
+        <div class="glass-card trending-card">
+          <div class="trending-content" id="16498" style="background: url('https://wallpapers.com/images/high/levi-soaked-in-the-rain-4k-2pg055ywyydvym9p.webp') center/cover no-repeat;">
+            <div class="trending-text">
+              <h3>Attack on Titan</h3>
+              <p>Humans battle man-eating Titans to reclaim their world.</p>
+              <div class="trending-meta">
+                <div class="rating">★ 9.0</div>
+                <div class="trending-type">Anime</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card trending-card">
+          <div class="trending-content" id="38000"style="background: url('https://wallpapers.com/images/hd/demon-slayer-hashiras-and-muzan-poiyga4v7urv2lh4.webp') center/cover no-repeat;">
+            <div class="trending-text">
+              <h3>Demon Slayer</h3>
+              <p>A young man fights demons that killed his family and cursed his sister.</p>
+              <div class="trending-meta">
+                <div class="rating">★ 8.7</div>
+                <div class="trending-type">Anime</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Movies -->
+        <div class="glass-card trending-card">
+          <div class="trending-content" id="tt1375666" style="background: url('https://wallpapers.com/images/high/inception-movie-bending-reality-5qaxnum82tobiqng.webp') center/cover no-repeat;">
+            <div class="trending-text">
+              <h3>Inception</h3>
+              <p>A thief uses dream-sharing technology to steal secrets.</p>
+              <div class="trending-meta">
+                <div class="rating">★ 8.8</div>
+                <div class="trending-type">Movie</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card trending-card">
+          <div class="trending-content" id="tt0468569" style="background: url('https://wallpapers.com/images/high/dark-knight-hd-x58gg0oxwqyanqmx.webp') center/cover no-repeat;">
+            <div class="trending-text">
+              <h3>The Dark Knight</h3>
+              <p>Batman battles the Joker in a fight for Gotham's soul.</p>
+              <div class="trending-meta">
+                <div class="rating">★ 9.0</div>
+                <div class="trending-type">Movie</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Recommendations Section -->
+  <section class="recommendations">
+    <div class="container">
+      <h2>Recommended For You</h2>
+      <div class="recommendations-grid">
+        <div class="glass-card recommend-card" id="21">
+          <img src="https://wallpapers.com/images/hd/one-piece-luffy-holding-hat-nazsl5hmss8bfb9n.webp" alt="One Piece">
+          <div class="recommend-content">
+            <h3>One Piece</h3>
+            <p>Monkey D. Luffy and his pirate crew explore the Grand Line in search of the ultimate treasure.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 8.9</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card recommend-card" id="20">
+          <img src="https://wallpapers.com/images/high/naruto-uzumaki-4k-mtswri40om2eov4o.webp" alt="Naruto">
+          <div class="recommend-content">
+            <h3>Naruto</h3>
+            <p>A young ninja dreams of becoming his village's leader.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 8.3</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card recommend-card" id="269">
+          <img src="https://wallpapers.com/images/hd/ichigo-and-zangetsu-bleach-4k-ultra-hd-fanart-ymhbljxwfhxsnm3n.webp" alt="Bleach">
+          <div class="recommend-content">
+            <h3>Bleach</h3>
+            <p>Ichigo Kurosaki becomes a Soul Reaper and battles evil spirits to protect the living world.</p>
+            <div class="recommend-meta">
+              <div class="rating">★ 8.9</div>
+              <div class="trending-type">Anime</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Popular Categories Section -->
+  <section class="popular">
+    <div class="container">
+      <h2>Popular Categories</h2>
+      <div class="categories-grid">
+        <div class="glass-card category-card">
+          <div class="category-icon">🎬</div>
+          <h3>Action</h3>
+          <p>Fast-paced and exciting movies and shows</p>
+        </div>
+        <div class="glass-card category-card">
+          <div class="category-icon">❤️</div>
+          <h3>Romance</h3>
+          <p>Stories focused on romantic relationships</p>
+        </div>
+        <div class="glass-card category-card">
+          <div class="category-icon">👻</div>
+          <h3>Horror</h3>
+          <p>Scary and thrilling entertainment</p>
+        </div>
+        <div class="glass-card category-card">
+          <div class="category-icon">🔍</div>
+          <h3>Mystery</h3>
+          <p>Puzzling stories that keep you guessing</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>About ShowFusion</h3>
+          <p>ShowFusion is your ultimate entertainment platform for discovering movies, TV shows, and anime from around the world.</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon">f</a>
+            <a href="#" class="social-icon">t</a>
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">ig</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html" style="color: #FF6F61;">Home</a></li>
+            <li><a href="Movie.html">Movies</a></li>
+            <li><a href="TvShows.html">TV Shows</a></li>
+            <li><a href="Anime.html">Anime</a></li>
+            <li><a href="#">My List</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Help & Support</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Newsletter</h3>
+          <p>Subscribe to our newsletter for updates on new releases and features.</p>
+          <form>
+            <input type="email" id="email" placeholder="Enter your email" style="padding:8px; width:100%; margin-bottom:10px; border-radius:4px; border:none;">
+            <button id="Newsletter" style="background:#FF6F61; color:#fff; border:none; padding:8px 15px; border-radius:4px; cursor:pointer; width:100%;">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ShowFusion. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Mobile Menu Animation
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    
+    hamburger.addEventListener('click', () => { 
+      mobileMenu.classList.toggle('open'); 
+    });
+    
+    mobileClose.addEventListener('click', () => { 
+      mobileMenu.classList.remove('open'); 
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+      }
+    });
+    
+    // Image Slider
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+    function showSlide(n) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[n].classList.add('active');
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+    setInterval(nextSlide, 5000);
+    
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Navbar Entrance
+    gsap.from(".navbar", { duration: 1, opacity: 0, y: -20, ease: "power2.out" });
+    
+    // Slider Text Entrance
+    gsap.from(".slide-content", { duration: 1, opacity: 0, y: 20, ease: "power2.out", delay: 0.5, stagger: 0.3 });
+    
+    // Animate glass cards (Trending, Recommendations, Categories)
+    gsap.utils.toArray('.glass-card').forEach(card => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+    });
+    
+    // Footer Animation
+    gsap.from("footer", { duration: 1, opacity: 0, y: 20, ease: "power2.out", delay: 0.3 });
+  </script>
+  <script>
+    const newsletterBtn = document.getElementById('Newsletter');
+    const emailInput = document.getElementById('email');
+    
+    function isValidEmail(email) {
+      // Simple regex for email validation
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    newsletterBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      const email = emailInput.value.trim();
+      
+      if (email === "" || !isValidEmail(email)) {
+        Swal.fire({
+          icon: "error",
+          title: "Please enter a valid email address",
+          customClass: {
+            popup: 'glass-swal'
+          }
+        });
+        return;
+      }
+      
+      Swal.fire({
+        title: `<strong>Newsletters will be sent to ${email}</strong>`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: 'glass-swal'
+        }
+      });
+      emailInput.value = "";
+    });
+
+    
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const breakingbed = document.getElementById('169');
+      if (breakingbed) {
+          breakingbed.addEventListener("click", () => {
+              window.location.href = `details.html?id=169`;
+          });
+      } else {
+          console.log("Element with ID '169' not found");
+      }
+      const gameofthrones = document.getElementById('82');
+      if (gameofthrones) {
+        gameofthrones.addEventListener("click", () => {
+              window.location.href = `details.html?id=82`;
+          });
+      } else {
+          console.log("Element with ID '82' not found");
+      }
+      const attackontitans = document.getElementById('16498');
+      if (attackontitans) {
+        attackontitans.addEventListener("click", () => {
+              window.location.href = `detailsanime.html?id=16498`;
+          });
+      } else {
+          console.log("Element with ID '16498' not found");
+      }
+      const demonslayer = document.getElementById('38000');
+      if (demonslayer) {
+        demonslayer.addEventListener("click", () => {
+              window.location.href = `detailsanime.html?id=38000`;
+          });
+      } else {
+          console.log("Element with ID '38000' not found");
+      }
+      const inception = document.getElementById('tt1375666');
+      if (inception) {
+        inception.addEventListener("click", () => {
+              window.location.href = `detailsmovie.html?id=tt1375666`;
+          });
+      } else {
+          console.log("Element with ID 'tt1375666' not found");
+      }
+      const darkKnight = document.getElementById('tt0468569');
+      if (darkKnight) {
+        darkKnight.addEventListener("click", () => {
+              window.location.href = `detailsmovie.html?id=tt0468569`;
+          });
+      } else {
+          console.log("Element with ID 'tt0468569' not found");
+      }
+      const onepiece = document.getElementById('21');
+      if (onepiece) {
+        onepiece.addEventListener("click", () => {
+              window.location.href = `detailsanime.html?id=21`;
+          });
+      } else {
+          console.log("Element with ID '21' not found");
+      }
+      const naruto = document.getElementById('20');
+      if (naruto) {
+      naruto.addEventListener("click", () => {
+              window.location.href = `detailsanime.html?id=20`;
+          });
+      } else {
+          console.log("Element with ID '20' not found");
+      }
+      const bleach = document.getElementById('269');
+      if (bleach) {
+        bleach.addEventListener("click", () => {
+              window.location.href = `detailsanime.html?id=269`;
+          });
+      } else {
+          console.log("Element with ID '269' not found");
+      }
+      
+  });
+  </script>
+  
+</body>
+</html>

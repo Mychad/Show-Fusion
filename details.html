@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Show Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="details.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="tv-body">
+    <nav class="navbar">
+        <div class="logo">ShowFusion</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="TvShows.html" style="color: #FF6F61;">TV Shows</a>
+            <a href="Anime.html">Animes</a>
+            <a href="Movie.html">Movies</a>
+        </div>
+        <div class="profile" title="Account">A</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+  
+    <!-- Mobile Menu (Keeping original) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-close" id="mobileClose">×</div>
+        <a href="index.html">Home</a>
+        <a href="TvShows.html" style="color: #FF6F61;">TV Shows</a>
+        <a href="Anime.html">Animes</a>
+        <a href="Movie.html">Movies</a>
+        <a href="#">My Account</a>
+    </div>
+  
+  <div class="main-content">
+    <div class="hero-section">
+      <div class="main-image-container">
+        <img src="" alt="Show Cover" class="main-image" id="mainImage">
+        <div class="image-overlay">
+          <h1 id="showTitle"></h1>
+          <div class="quick-info">
+            <span><i class="fas fa-star"></i> <span id="quickRating"></span></span>
+            <span><i class="fas fa-calendar"></i> <span id="quickYear"></span></span>
+            <span><i class="fas fa-tv"></i> <span id="quickType"></span></span>
+            <span><i class="fas fa-clock"></i> <span id="quickStatus"></span></span>
+          </div>
+        </div>
+      </div>
+      <div class="thumbnail-gallery" id="imageGallery">
+        <img src="" alt="Thumbnail" class="thumbnail active">
+        <img src="" alt="Thumbnail" class="thumbnail">
+        <img src="" alt="Thumbnail" class="thumbnail">
+        <img src="" alt="Thumbnail" class="thumbnail">
+        <img src="" alt="Thumbnail" class="thumbnail">
+      </div>
+    </div>
+    <div class="action-buttons">
+        <button id="watchedBtn" class="anime-action-btn primary"><i class="fas fa-play"></i> Watched</button>
+        <button id="addToListBtn" class="anime-action-btn secondary"><i class="fas fa-plus"></i> Add to watching List</button>
+        <button id="favoriteBtn" class="anime-action-btn secondary"><i class="fas fa-heart"></i> Favorite</button>
+      </div>
+      
+    <div class="info-grid">
+      <div class="show-details">
+        <div class="detail-section glass" id="summarySection">
+          <div class="section-header">
+            <h2>Summary</h2>
+          </div>
+          <div class="summary-content" id="showSummary">
+            <p></p>
+          </div>
+         
+        </div>
+        <div class="detail-section glass" id="episodesSection">
+          <div class="section-header">
+            <h2>Episodes</h2>
+          </div>
+          <div class="seasons-tabs" id="seasonsTabContainer">
+            <div class="season-tab active" data-season="1"></div>
+            <div class="season-tab" data-season="2"></div>
+            <div class="season-tab" data-season="3"></div>
+            <div class="season-tab" data-season="4"></div>
+          </div>
+          <div class="episodes-list" id="episodesList">
+            <div class="episode-card">
+              <div class="episode-header">
+                <h3><span class="episode-number">S01E01:</span> Pilot</h3>
+                <div class="episode-rating">★ 8.7</div>
+              </div>
+              <div class="episode-info">
+                <span>45 min</span>
+                <span>Oct 12, 2023</span>
+              </div>
+              <div class="episode-summary">
+                <p>In the series premiere, we are introduced to the main characters...</p>
+              </div>
+            </div>
+            <div class="episode-card">
+              <div class="episode-header">
+                <h3><span class="episode-number">S01E02:</span> The Beginning</h3>
+                <div class="episode-rating">★ 9.1</div>
+              </div>
+              <div class="episode-info">
+                <span>42 min</span>
+                <span>Oct 19, 2023</span>
+              </div>
+              <div class="episode-summary">
+                <p>The team discovers a mysterious artifact that could change everything...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-section glass" id="castSection">
+          <div class="section-header">
+            <h2>Cast</h2>
+          </div>
+          <div class="cast-grid" id="castGrid">
+            <div class="cast-card">
+              <img src="/api/placeholder/200/200" alt="Actor Name" class="cast-image">
+              <div class="cast-name">Actor Name</div>
+              <div class="character-name">Character Name</div>
+            </div>
+            <div class="cast-card">
+              <img src="/api/placeholder/200/200" alt="Actor Name" class="cast-image">
+              <div class="cast-name">Actor Name</div>
+              <div class="character-name">Character Name</div>
+            </div>
+            <div class="cast-card">
+              <img src="/api/placeholder/200/200" alt="Actor Name" class="cast-image">
+              <div class="cast-name">Actor Name</div>
+              <div class="character-name">Character Name</div>
+            </div>
+            <div class="cast-card">
+              <img src="/api/placeholder/200/200" alt="Actor Name" class="cast-image">
+              <div class="cast-name">Actor Name</div>
+              <div class="character-name">Character Name</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="show-sidebar">
+        <div class="info-box glass">
+          <div class="section-header">
+            <h2>Show Information</h2>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Network:</span>
+            <span class="info-value" id="showNetwork">HBO</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Premiered:</span>
+            <span class="info-value" id="showPremiered">October 12, 2023</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Status:</span>
+            <span class="info-value" id="showStatusInfo">Running</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Schedule:</span>
+            <span class="info-value" id="showSchedule">Thursdays at 9:00 PM</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Runtime:</span>
+            <span class="info-value" id="showRuntime">45 minutes</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Language:</span>
+            <span class="info-value" id="showLanguage">English</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Rating:</span>
+            <div id="showRatingBox">
+              <div class="rating-stars" id="showRatingStars">★★★★☆</div>
+              <span id="showRatingValue">8.5/10</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Genres:</span>
+            <div class="genre-tags" id="genreTags">
+              <div class="genre-tag">Drama</div>
+              <div class="genre-tag">Sci-Fi</div>
+              <div class="genre-tag">Thriller</div>
+            </div>
+          </div>
+        </div>
+        <div class="info-box glass">
+          <div class="section-header">
+            <h2>External Links</h2>
+          </div>
+          <div class="external-links">
+            <div class="external-link">
+              <i class="fas fa-globe"></i>
+              <span id="officialSite">Official Site</span>
+            </div>
+            <div class="external-link">
+              <i class="fab fa-imdb"></i>
+              <span id="imdbLink">IMDb</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-section glass" id="userReviewsSection">
+    <div class="section-header">
+        <h2>User Reviews</h2>
+    </div>
+    <div id="reviewsContainer">
+        <p>No reviews yet. Be the first to add one!</p>
+    </div>
+    <div class="add-review-form">
+        <label for="reviewerName">Your Name</label>
+        <input type="text" id="reviewerName" placeholder="Enter your name" autocomplete="off">
+        
+        <label for="userReview">Your Review</label>
+        <textarea id="userReview" placeholder="Write your review here..." autocomplete="off"></textarea>
+        
+        <button id="addReviewBtn" class="anime-action-btn primary">Submit Review</button>
+    </div>
+</div>
+  <footer>
+    <div class="container">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About ShowFusion</h3>
+                <p>ShowFusion is your ultimate entertainment platform for discovering movies, TV shows, and anime from around the world.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Movie.html">Movies</a></li>
+                    <li><a href="TvShows.html" style="color: #FF6F61;">TV Shows</a></li>
+                    <li><a href="Anime.html">Anime</a></li>
+                    <li><a href="#">My List</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates on new releases and features.</p>
+                <form>
+                    <input type="email" id="email" placeholder="Enter your email" style="padding:8px; width:100%; margin-bottom:10px; border-radius:4px; border:none;">
+                    <button id="Newsletter" style="background:#FF6F61; color:#fff; border:none; padding:8px 15px; border-radius:4px; cursor:pointer; width:100%;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ShowFusion. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<script>
+document.getElementById('watchedBtn').addEventListener('click', function() {
+  if (this.style.backgroundColor === 'black') {
+      this.style.backgroundColor = 'white';
+      this.style.color = 'black';
+  } else {
+      this.style.backgroundColor = 'black';
+      this.style.color = 'white';
+  }
+});
+
+document.getElementById('addToListBtn').addEventListener('click', function() {
+  if (this.style.backgroundColor === 'black') {
+      this.style.backgroundColor = 'white';
+      this.style.color = 'black';
+  } else {
+      this.style.backgroundColor = 'black';
+      this.style.color = 'white';
+  }
+});
+
+document.getElementById('favoriteBtn').addEventListener('click', function() {
+  const heartIcon = this.querySelector('i');
+  if (heartIcon.style.color === 'red') {
+      heartIcon.style.color = 'black';
+  } else {
+      heartIcon.style.color = 'red';
+  }
+});
+</script>
+<script>
+    // Mobile Menu Animation (Keeping original)
+    const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click', () => { 
+  mobileMenu.classList.toggle('open'); 
+});
+
+mobileClose.addEventListener('click', () => { 
+  mobileMenu.classList.remove('open'); 
+});
+
+document.addEventListener('click', (e) => {
+  if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+    mobileMenu.classList.remove('open');
+  }
+});
+    const newsletterBtn = document.getElementById('Newsletter');
+    const emailInput = document.getElementById('email');
+    
+    function isValidEmail(email) {
+        // Simple regex for email validation
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    newsletterBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        
+        if (email === "" || !isValidEmail(email)) {
+            Swal.fire({
+                icon: "error",
+                title: "Please enter a valid email address",
+                customClass: {
+                    popup: 'glass-swal'
+                }
+            });
+            return;
+        }
+        
+        Swal.fire({
+            title: `<strong>Newsletters will be sent to ${email}</strong>`,
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: 'glass-swal'
+            }
+        });
+        emailInput.value = "";
+    });
+</script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchShowDetails();
+      
+      const showSummary = document.getElementById('showSummary');
+      
+    });
+    
+    async function fetchShowDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const showId = urlParams.get('id') || '1';
+      try {
+        const response = await fetch(`https://api.tvmaze.com/shows/${showId}?embed[]=cast&embed[]=episodes&embed[]=images`);
+        const show = await response.json();
+        populateShowDetails(show);
+      } catch (error) {
+        console.error('Error fetching show details:', error);
+      }
+    }
+    
+    function populateShowDetails(show) {
+      document.getElementById('showTitle').textContent = show.name;
+      document.getElementById('quickRating').textContent = show.rating && show.rating.average ? show.rating.average : 'N/A';
+      document.getElementById('quickYear').textContent = show.premiered ? new Date(show.premiered).getFullYear() : 'N/A';
+      document.getElementById('quickType').textContent = show.type || 'N/A';
+      document.getElementById('quickStatus').textContent = show.status;
+      document.title = `${show.name} | TvShow Details`;
+      if (show.image && show.image.original) {
+        document.getElementById('mainImage').src = show.image.original;
+      }
+      document.getElementById('showSummary').innerHTML = show.summary || 'No summary available.';
+      document.getElementById('showNetwork').textContent = show.network ? show.network.name : 'N/A';
+      document.getElementById('showPremiered').textContent = show.premiered ? new Date(show.premiered).toLocaleDateString() : 'N/A';
+      document.getElementById('showStatusInfo').textContent = show.status;
+      if (show.schedule) {
+        document.getElementById('showSchedule').textContent = show.schedule.days.join(', ') + ' at ' + show.schedule.time;
+      }
+      document.getElementById('showRuntime').textContent = show.runtime ? show.runtime + ' min' : 'N/A';
+      document.getElementById('showLanguage').textContent = show.language;
+      document.getElementById('showRatingValue').textContent = show.rating && show.rating.average ? show.rating.average + '/10' : 'N/A';
+      if (show.genres && show.genres.length > 0) {
+        document.getElementById('genreTags').textContent = show.genres.join(', ');
+      }
+      const imageGallery = document.getElementById('imageGallery');
+      imageGallery.innerHTML = '';
+      if (show._embedded && show._embedded.images && show._embedded.images.length > 0) {
+        show._embedded.images.forEach((imgObj, index) => {
+          const thumb = document.createElement('img');
+          thumb.src = (imgObj.resolutions && imgObj.resolutions.medium) ? imgObj.resolutions.medium.url : (show.image.medium || '');
+          thumb.alt = 'Thumbnail';
+          thumb.classList.add('thumbnail');
+          if (index === 0) thumb.classList.add('active');
+          thumb.addEventListener('click', () => {
+            document.getElementById('mainImage').src = thumb.src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          });
+          imageGallery.appendChild(thumb);
+        });
+      } else {
+        const thumb = document.createElement('img');
+        thumb.src = show.image.medium || '';
+        thumb.alt = 'Thumbnail';
+        thumb.classList.add('thumbnail', 'active');
+        imageGallery.appendChild(thumb);
+      }
+      const castGrid = document.getElementById('castGrid');
+      castGrid.innerHTML = '';
+      if (show._embedded && show._embedded.cast && show._embedded.cast.length > 0) {
+        show._embedded.cast.forEach(item => {
+          const castCard = document.createElement('div');
+          castCard.classList.add('cast-card');
+          const actorImg = document.createElement('img');
+          actorImg.classList.add('cast-image');
+          actorImg.src = item.person.image ? item.person.image.medium : 'https://via.placeholder.com/200';
+          actorImg.alt = item.person.name;
+          const castName = document.createElement('div');
+          castName.classList.add('cast-name');
+          castName.textContent = item.person.name;
+          const characterName = document.createElement('div');
+          characterName.classList.add('character-name');
+          characterName.textContent = item.character.name;
+          castCard.appendChild(actorImg);
+          castCard.appendChild(castName);
+          castCard.appendChild(characterName);
+          castGrid.appendChild(castCard);
+        });
+      } else {
+        castGrid.innerHTML = '<p>No cast information available.</p>';
+      }
+      const episodesList = document.getElementById('episodesList');
+      episodesList.innerHTML = '';
+      let episodesBySeason = {};
+      if (show._embedded && show._embedded.episodes && show._embedded.episodes.length > 0) {
+        show._embedded.episodes.forEach(episode => {
+          if (!episodesBySeason[episode.season]) {
+            episodesBySeason[episode.season] = [];
+          }
+          episodesBySeason[episode.season].push(episode);
+        });
+      }
+      const seasonsTabContainer = document.getElementById('seasonsTabContainer');
+      seasonsTabContainer.innerHTML = '';
+      Object.keys(episodesBySeason).forEach((season, index) => {
+        const seasonTab = document.createElement('div');
+        seasonTab.classList.add('season-tab');
+        if (index === 0) seasonTab.classList.add('active');
+        seasonTab.dataset.season = season;
+        seasonTab.textContent = 'Season ' + season;
+        seasonTab.addEventListener('click', () => {
+          document.querySelectorAll('.season-tab').forEach(tab => tab.classList.remove('active'));
+          seasonTab.classList.add('active');
+          displayEpisodes(episodesBySeason[season]);
+        });
+        seasonsTabContainer.appendChild(seasonTab);
+      });
+      const firstSeason = Object.keys(episodesBySeason)[0];
+      if (firstSeason) {
+        displayEpisodes(episodesBySeason[firstSeason]);
+      } else {
+        episodesList.innerHTML = '<p>No episodes available.</p>';
+      }
+    }
+    
+    function displayEpisodes(episodes) {
+      const episodesList = document.getElementById('episodesList');
+      episodesList.innerHTML = '';
+      episodes.forEach(episode => {
+        const episodeCard = document.createElement('div');
+        episodeCard.classList.add('episode-card');
+        const episodeHeader = document.createElement('div');
+        episodeHeader.classList.add('episode-header');
+        episodeHeader.innerHTML = `<h3><span class="episode-number">S${episode.season.toString().padStart(2, '0')}E${episode.number.toString().padStart(2, '0')}:</span> ${episode.name}</h3>`;
+        const episodeInfo = document.createElement('div');
+        episodeInfo.classList.add('episode-info');
+        episodeInfo.innerHTML = `<span>${episode.runtime ? episode.runtime + ' min' : 'N/A'}</span> | <span>${episode.airdate ? new Date(episode.airdate).toLocaleDateString() : 'N/A'}</span>`;
+        const episodeSummary = document.createElement('div');
+        episodeSummary.classList.add('episode-summary');
+        episodeSummary.innerHTML = episode.summary || 'No summary available.';
+        episodeCard.addEventListener('click', () => {
+          episodeCard.classList.toggle('expanded');
+        });
+        episodeCard.appendChild(episodeHeader);
+        episodeCard.appendChild(episodeInfo);
+        episodeCard.appendChild(episodeSummary);
+        episodesList.appendChild(episodeCard);
+      });
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const addReviewBtn = document.getElementById("addReviewBtn");
+    const reviewsContainer = document.getElementById("reviewsContainer");
+  
+    addReviewBtn.addEventListener("click", () => {
+        const name = document.getElementById("reviewerName").value.trim();
+        const review = document.getElementById("userReview").value.trim();
+  
+        if (name === "" || review === "") {
+          Swal.fire({
+            title: "Failed!",
+            text: "Please Enter Both fields",
+            icon: "error",
+            background: "linear-gradient(45deg, #1d2671, #c33764)",
+            iconColor: "#fff",
+            color: "#fff",
+            timer:1500,
+            showConfirmButton: true,
+            confirmButtonText: "OOPS!!",
+            position: "center",
+            showClass: {
+                popup: 'animate__animated animate__zoomIn'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__zoomOut'
+            },
+            customClass: {
+                popup: 'fancy-swal-popup',
+                confirmButton: 'fancy-confirm-btn'
+            }
+        });
+            return;
+        }
+  
+        // Remove the "No reviews yet" message if it exists
+        const noReviewText = reviewsContainer.querySelector("p");
+        if (noReviewText && noReviewText.textContent.includes("No reviews yet")) {
+            noReviewText.remove();
+        }
+  
+        const reviewDiv = document.createElement("div");
+        reviewDiv.classList.add("review-card");
+  
+        reviewDiv.innerHTML = `
+            <h3>${name}</h3>
+            <p>${review}</p>
+            <button class="delete-review-btn">Delete</button>
+        `;
+  
+        reviewsContainer.appendChild(reviewDiv);
+  
+        // Clear input fields
+        document.getElementById("reviewerName").value = "";
+        document.getElementById("userReview").value = "";
+  
+        Swal.fire({
+          title: "Review Added Successfully!",
+          text: "Thank you for sharing your review.",
+          icon: "success",
+          background: "linear-gradient(45deg, #1d2671, #c33764)",
+          iconColor: "#fff",
+          color: "#fff",
+          timer:1500,
+          showConfirmButton: true,
+          confirmButtonText: "Awesome!",
+          position: "center",
+          showClass: {
+              popup: 'animate__animated animate__zoomIn'
+          },
+          hideClass: {
+              popup: 'animate__animated animate__zoomOut'
+          },
+          customClass: {
+              popup: 'fancy-swal-popup',
+              confirmButton: 'fancy-confirm-btn'
+          }
+      });
+    });
+  
+    // Delete review event delegation
+    reviewsContainer.addEventListener("click", (event) => {
+        if (event.target.classList.contains("delete-review-btn")) {
+            event.target.parentElement.remove();
+  
+            // If no reviews left, show "No reviews yet" message again
+            if (reviewsContainer.children.length === 0) {
+                reviewsContainer.innerHTML = `<p>No reviews yet. Be the first to add one!</p>`;
+            }
+        }
+    });
+  });
+  
+  </script>
+</body>
+</html>

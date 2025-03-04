@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Using same CSS files for consistent design -->
+  <link rel="stylesheet" href="details.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- GSAP and SweetAlert2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Axios for API calls -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    /* Simple styles for search form and pagination if needed */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255,111,97,0.3);
+      border-radius: 50%;
+      border-top-color: #FF6F61;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="tv-body">
+  <!-- Navbar -->
+  <nav class="navbar">
+      <div class="logo">ShowFusion</div>
+      <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="TvShows.html">TV Shows</a>
+          <a href="Anime.html">Anime</a>
+          <a href="Movie.html" style="color: #FF6F61;">Movies</a>
+      </div>
+      <div class="profile" title="Account">A</div>
+      <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+  </nav>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-close" id="mobileClose">×</div>
+      <a href="index.html">Home</a>
+      <a href="TvShows.html">TV Shows</a>
+      <a href="Anime.html">Anime</a>
+      <a href="Movie.html" style="color: #FF6F61;">Movies</a>
+      <a href="#">My Account</a>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="main-image-container">
+        <!-- Movie Poster -->
+        <img src="" alt="Movie Poster" class="main-image" id="mainImage">
+        <div class="image-overlay">
+          <h1 id="movieTitle"></h1>
+          <div class="quick-info">
+            <span><i class="fas fa-star"></i> <span id="quickRating"></span></span>
+            <span><i class="fas fa-calendar"></i> <span id="quickYear"></span></span>
+            <span><i class="fas fa-clock"></i> <span id="quickRuntime"></span></span>
+            <span><i class="fas fa-quote-left"></i> <span id="quickTagline"></span></span>
+          </div>
+        </div>
+      </div>
+      <!-- Thumbnail Gallery (optional for backdrops) -->
+      <div class="thumbnail-gallery" id="imageGallery">
+        <!-- Thumbnails will be populated dynamically -->
+      </div>
+    </div>
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button id="watchedBtn" class="anime-action-btn primary"><i class="fas fa-play"></i> Watched</button>
+        <button id="addToListBtn" class="anime-action-btn secondary"><i class="fas fa-plus"></i> Add to watching List</button>
+        <button id="favoriteBtn" class="anime-action-btn secondary"><i class="fas fa-heart"></i> Favorite</button>
+    </div>
+      
+    <!-- Info Grid -->
+    <div class="info-grid">
+      <div class="show-details">
+        <!-- Overview Section -->
+        <div class="detail-section glass" id="summarySection">
+          <div class="section-header">
+            <h2>Overview</h2>
+          </div>
+          <div class="summary-content" id="movieOverview">
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar -->
+      <div class="show-sidebar">
+        <div class="info-box glass">
+          <div class="section-header">
+            <h2>Movie Information</h2>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Release Date:</span>
+            <span class="info-value" id="releaseDate">N/A</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Runtime:</span>
+            <span class="info-value" id="runtime">N/A</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Genres:</span>
+            <div class="genre-tags" id="genreTags">
+              <!-- Genre tags will be populated dynamically -->
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Rating:</span>
+            <div id="ratingBox">
+              <div class="rating-stars" id="ratingStars">★★★★☆</div>
+              <span id="ratingValue">N/A</span>
+            </div>
+          </div>
+        </div>
+        <!-- New Cast Section -->
+        <div class="info-box glass">
+          <div class="section-header">
+            <h2>Cast</h2>
+          </div>
+          <div class="cast-info" id="movieCast">
+            <!-- Cast names will be populated dynamically -->
+          </div>
+        </div>
+        <div class="info-box glass">
+          <div class="section-header">
+            <h2>External Links</h2>
+          </div>
+          <div class="external-links">
+            <div class="external-link">
+              <i class="fas fa-globe"></i>
+              <span id="officialSite">Official site</span>
+            </div>
+            <div class="external-link">
+              <i class="fab fa-imdb"></i>
+              <span id="imdbLink">IMDb</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail-section glass" id="userReviewsSection">
+    <div class="section-header">
+        <h2>User Reviews</h2>
+    </div>
+    <div id="reviewsContainer">
+        <p>No reviews yet. Be the first to add one!</p>
+    </div>
+    <div class="add-review-form">
+        <label for="reviewerName">Your Name</label>
+        <input type="text" id="reviewerName" placeholder="Enter your name" autocomplete="off">
+        
+        <label for="userReview">Your Review</label>
+        <textarea id="userReview" placeholder="Write your review here..." autocomplete="off"></textarea>
+        
+        <button id="addReviewBtn" class="anime-action-btn primary">Submit Review</button>
+    </div>
+</div>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About ShowFusion</h3>
+                <p>ShowFusion is your ultimate entertainment platform for discovering movies, TV shows, and anime from around the world.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">t</a>
+                    <a href="#" class="social-icon">in</a>
+                    <a href="#" class="social-icon">ig</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Movie.html" style="color: #FF6F61;">Movies</a></li>
+                    <li><a href="TvShows.html">TV Shows</a></li>
+                    <li><a href="Anime.html">Anime</a></li>
+                    <li><a href="#">My List</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates on new releases and features.</p>
+                <form>
+                    <input type="email" id="email" placeholder="Enter your email" style="padding:8px; width:100%; margin-bottom:10px; border-radius:4px; border:none;">
+                    <button id="Newsletter" style="background:#FF6F61; color:#fff; border:none; padding:8px 15px; border-radius:4px; cursor:pointer; width:100%;">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ShowFusion. All rights reserved.</p>
+        </div>
+    </div>
+  </footer>
+  
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay" style="display:none;">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading movie details...</div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    
+    // Button interactions
+    document.getElementById('watchedBtn').addEventListener('click', function() {
+      if (this.style.backgroundColor === 'black') {
+          this.style.backgroundColor = 'white';
+          this.style.color = 'black';
+      } else {
+          this.style.backgroundColor = 'black';
+          this.style.color = 'white';
+      }
+    });
+    
+    document.getElementById('addToListBtn').addEventListener('click', function() {
+      if (this.style.backgroundColor === 'black') {
+          this.style.backgroundColor = 'white';
+          this.style.color = 'black';
+      } else {
+          this.style.backgroundColor = 'black';
+          this.style.color = 'white';
+      }
+    });
+    
+    document.getElementById('favoriteBtn').addEventListener('click', function() {
+      const heartIcon = this.querySelector('i');
+      if (heartIcon.style.color === 'red') {
+          heartIcon.style.color = 'black';
+      } else {
+          heartIcon.style.color = 'red';
+      }
+    });
+    
+    // Mobile Menu Animation
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    
+    hamburger.addEventListener('click', () => { 
+      mobileMenu.classList.toggle('open'); 
+    });
+    
+    mobileClose.addEventListener('click', () => { 
+      mobileMenu.classList.remove('open'); 
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+      }
+    });
+    
+    // Newsletter subscription
+    const newsletterBtn = document.getElementById('Newsletter');
+    const emailInput = document.getElementById('email');
+    
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    
+    newsletterBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        
+        if (email === "" || !isValidEmail(email)) {
+            Swal.fire({
+                icon: "error",
+                title: "Please enter a valid email address",
+                customClass: { popup: 'glass-swal' }
+            });
+            return;
+        }
+        
+        Swal.fire({
+            title: `<strong>Newsletters will be sent to ${email}</strong>`,
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: { popup: 'glass-swal' }
+        });
+        emailInput.value = "";
+    });
+    
+    // Main functionality for movie details
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      loadingOverlay.style.display = 'flex';
+      
+      fetchMovieDetails()
+        .finally(() => {
+          setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+          }, 500);
+        });
+    });
+    
+    async function fetchMovieDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const movieId = urlParams.get('id') || 'tt3896198'; // Default IMDb ID
+      try {
+        const response = await fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=d477f97`);
+        const movieData = await response.json();
+        populateMovieDetails(movieData);
+      } catch (error) {
+        console.error('Error fetching movie details:', error);
+      }
+    }
+    
+    function populateMovieDetails(movie) {
+      document.getElementById('movieTitle').textContent = movie.Title || '';
+      document.getElementById('quickRating').textContent = movie.imdbRating || 'N/A';
+      document.getElementById('quickYear').textContent = movie.Year || 'N/A';
+      document.getElementById('quickRuntime').textContent = movie.Runtime || 'N/A';
+      document.getElementById('quickTagline').textContent = movie.Tagline || '';
+      console.log("Movie Data:", movie);  // ✅ Debugging ke liye
+    document.title = `${movie.Title} | Movie Details`;
+      const mainImage = document.getElementById('mainImage');
+      if (movie.Poster && movie.Poster !== "N/A") {
+        mainImage.src = movie.Poster;
+        mainImage.onerror = function() {
+          this.src = '/api/placeholder/400/600';
+        };
+      }
+      
+      document.getElementById('movieOverview').innerHTML = movie.Plot || 'No overview available.';
+      
+      document.getElementById('releaseDate').textContent = movie.Released || 'N/A';
+      document.getElementById('runtime').textContent = movie.Runtime || 'N/A';
+      
+      const genreContainer = document.getElementById('genreTags');
+      genreContainer.innerHTML = '';
+      if (movie.Genre) {
+        movie.Genre.split(",").forEach(genre => {
+          const genreTag = document.createElement('div');
+          genreTag.classList.add('genre-tag');
+          genreTag.textContent = genre.trim();
+          genreContainer.appendChild(genreTag);
+        });
+      } else {
+        genreContainer.textContent = 'No genres listed';
+      }
+      
+      document.getElementById('ratingValue').textContent = movie.imdbRating ? `${movie.imdbRating}/10` : 'N/A';
+      if (movie.imdbRating && movie.imdbRating !== "N/A") {
+        const stars = Math.round(movie.imdbRating / 2);
+        let starsHTML = '';
+        for (let i = 1; i <= 5; i++) {
+          starsHTML += i <= stars ? '★' : '☆';
+        }
+        document.getElementById('ratingStars').innerHTML = starsHTML;
+      }
+      
+      // External Links
+      const officialSite = document.getElementById('officialSite');
+      officialSite.href = movie.Website && movie.Website !== "N/A" ? movie.Website : '#';
+      officialSite.textContent = movie.Website && movie.Website !== "N/A" ? "Official Website" : "N/A";
+      
+      const imdbLink = document.getElementById('imdbLink');
+      imdbLink.href = movie.imdbID ? `https://www.imdb.com/title/${movie.imdbID}` : '#';
+      imdbLink.textContent = movie.imdbID ? "IMDb" : "N/A";
+      
+      // Cast Section - using OMDb Actors field
+      const movieCast = document.getElementById('movieCast');
+      if (movie.Actors && movie.Actors !== "N/A") {
+        movieCast.innerHTML = "";
+        movie.Actors.split(",").forEach(actor => {
+          const span = document.createElement('span');
+          span.textContent = actor.trim();
+          span.style.display = "block";
+          movieCast.appendChild(span);
+        });
+      } else {
+        movieCast.innerHTML = "<p>No cast information available.</p>";
+      }
+      
+      // Additional sections like image gallery, recommendations etc. can be added similarly.
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const addReviewBtn = document.getElementById("addReviewBtn");
+      const reviewsContainer = document.getElementById("reviewsContainer");
+    
+      addReviewBtn.addEventListener("click", () => {
+          const name = document.getElementById("reviewerName").value.trim();
+          const review = document.getElementById("userReview").value.trim();
+    
+          if (name === "" || review === "") {
+            Swal.fire({
+              title: "Failed!",
+              text: "Please Enter Both fields",
+              icon: "error",
+              background: "linear-gradient(45deg, #1d2671, #c33764)",
+              iconColor: "#fff",
+              color: "#fff",
+              timer:1500,
+              showConfirmButton: true,
+              confirmButtonText: "OOPS!!",
+              position: "center",
+              showClass: {
+                  popup: 'animate__animated animate__zoomIn'
+              },
+              hideClass: {
+                  popup: 'animate__animated animate__zoomOut'
+              },
+              customClass: {
+                  popup: 'fancy-swal-popup',
+                  confirmButton: 'fancy-confirm-btn'
+              }
+          });
+              return;
+          }
+    
+          // Remove the "No reviews yet" message if it exists
+          const noReviewText = reviewsContainer.querySelector("p");
+          if (noReviewText && noReviewText.textContent.includes("No reviews yet")) {
+              noReviewText.remove();
+          }
+    
+          const reviewDiv = document.createElement("div");
+          reviewDiv.classList.add("review-card");
+    
+          reviewDiv.innerHTML = `
+              <h3>${name}</h3>
+              <p>${review}</p>
+              <button class="delete-review-btn">Delete</button>
+          `;
+    
+          reviewsContainer.appendChild(reviewDiv);
+    
+          // Clear input fields
+          document.getElementById("reviewerName").value = "";
+          document.getElementById("userReview").value = "";
+    
+          Swal.fire({
+            title: "Review Added Successfully!",
+            text: "Thank you for sharing your review.",
+            icon: "success",
+            background: "linear-gradient(45deg, #1d2671, #c33764)",
+            iconColor: "#fff",
+            color: "#fff",
+            timer:1500,
+            showConfirmButton: true,
+            confirmButtonText: "Awesome!",
+            position: "center",
+            showClass: {
+                popup: 'animate__animated animate__zoomIn'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__zoomOut'
+            },
+            customClass: {
+                popup: 'fancy-swal-popup',
+                confirmButton: 'fancy-confirm-btn'
+            }
+        });
+      });
+    
+      // Delete review event delegation
+      reviewsContainer.addEventListener("click", (event) => {
+          if (event.target.classList.contains("delete-review-btn")) {
+              event.target.parentElement.remove();
+    
+              // If no reviews left, show "No reviews yet" message again
+              if (reviewsContainer.children.length === 0) {
+                  reviewsContainer.innerHTML = `<p>No reviews yet. Be the first to add one!</p>`;
+              }
+          }
+      });
+    });
+    
+  </script>
+</body>
+</html>

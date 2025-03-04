@@ -1,0 +1,169 @@
+@media (max-width: 700px) {
+        .slide-content h2{
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+        .trending {
+            padding: 40px 0;
+        }
+        .recommendations {
+            padding: 40px 0;
+        }
+          .trending-card {
+            flex: 0 0 calc(50% - 25px); /* 2 cards per row */
+          }
+          .recommend-card {
+            flex: 0 0 calc(50% - 25px);
+          }
+          .popular {
+            padding: 40px 0;
+          }
+          .category-card {
+            flex: 0 0 calc(30% - 20px);
+            margin: 10px;
+            /* ... other styles ... */
+          }
+          .search-section h2{
+            margin-bottom: 60px;
+            font-size: 2em;
+          }
+          .Show {
+            width: 280px;
+          }
+          .search-input {
+            width: 40%
+        }
+    }
+    @media screen and (max-width: 530px){
+        .slide-content h2{
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+        .trending {
+            padding: 30px 0;
+        }
+        .trending h2{
+            font-size: 1.8em;
+        }
+        .recommendations {
+            padding: 30px 0;
+        }
+        .recommendations h2{
+            font-size: 1.8em;
+        }
+          .trending-card {
+            flex: 0 0 calc(50% - 25px); /* 2 cards per row */
+          }
+          .recommend-card {
+            flex: 0 0 calc(50% - 25px);
+          }
+          
+          .popular {
+            padding: 30px 0;
+          }
+          .popular h2{
+            font-size: 1.8em;
+        }
+          .category-card {
+            flex: 0 0 calc(30% - 20px);
+            margin: 8px;
+            /* ... other styles ... */
+          }
+          .footer-col {
+            flex: 0 0 calc(50% - 30px);
+          }
+          .Show {
+            width: 350px;
+          }
+          .search-input {
+            width: 50%
+        }
+        svg{
+            width: 23;
+            height: 23;
+        }
+        .search-section h2{
+            margin-bottom: 50px;
+            font-size: 1.8em;
+          }
+          
+    }
+
+@media (max-width:490px){
+    .slide-content h2{
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .slide-content p{
+        font-size: 1em;
+       
+    }
+    .slide-content a{
+        padding: 8px 20px;
+    font-size: 0.8em;
+     font-weight: 500;
+    }
+    .trending {
+        padding: 20px 0;
+    }
+    .recommendations {
+        padding: 20px 0;
+    }
+      .trending-card {
+        flex: 0 0 calc(80% - 25px); /* 2 cards per row */
+      }
+      .recommend-card {
+        flex: 0 0 calc(80% - 25px);
+      }
+      .popular {
+        padding: 20px 0;
+      }
+      .category-card {
+        flex: 0 0 calc(50% - 20px);
+        margin: 10px;
+        /* ... other styles ... */
+      }
+      .recommend-card {
+        flex: 0 0 calc(80% - 25px);
+        margin: 10px auto;
+      }
+      .trending-grid,
+    .recommend-grid,
+    .categories-grid {
+
+    justify-content: center; /* This centers all flex items */
+}
+.search-section {
+    background-color: black;
+    padding: 35px 18px 70px 18px;
+}
+.Show {
+    width:380px;
+  }
+  .search-input {
+    width: 60%;
+    margin-right: 3%;
+}
+svg{
+    width: 24;
+    height: 24;
+}
+.search-section h2{
+    margin-bottom: 50px;
+    font-size: 1.5em;
+  }
+}
+@media (max-width:390px){
+    .search-section h2{
+        margin-bottom: 50px;
+        font-size: 1.2em;
+      }
+      .search-input {
+        width: 70%;
+        margin-right: 3%;
+    }
+    svg{
+        width: 24;
+        height: 24;
+    }
+}
